@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Which stage of the journey are you on? — Segmentation</title>
+<meta name="description" content="Tell us where you're starting from and we'll route you to the roadmap built for it." />
+
+<!-- =====================================================================
+  GA4 (Google Analytics 4) — PLACEHOLDER
+  Replace G-XXXXXXXXXX with your real GA4 Measurement ID.
+  Custom event "generate_lead" fires on successful form submit (see script
+  at bottom of page) with a "segment" parameter (business_owner /
+  freelancer / student).
+===================================================================== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+
+<!-- =====================================================================
+  Meta Pixel — PLACEHOLDER
+  Replace 0000000000000000 with your real Pixel ID.
+  A "Lead" event fires on successful form submit (see script at bottom
+  of page) with a custom "segment" parameter.
+===================================================================== -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '0000000000000000');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=0000000000000000&ev=PageView&noscript=1" /></noscript>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #F6F9F8;
+    --surface: #FFFFFF;
+    --surface-2: #EEF3F1;
+    --ink: #12241F;
+    --ink-soft: #55655F;
+    --ink-faint: #86958F;
+    --line: #DEE6E2;
+    --accent: #0E7C86;
+    --accent-strong: #0A5A62;
+    --accent-tint: #E3F3F2;
+    --focus-ring: #0E7C86;
+
+    --seg-owner: #0E7C86;
+    --seg-owner-tint: #E3F3F2;
+    --seg-free: #A85F1E;
+    --seg-free-tint: #FAEDDE;
+    --seg-student: #5C7A34;
+    --seg-student-tint: #EDF3E1;
+
+    --radius-lg: 18px;
+    --radius-md: 12px;
+    --shadow-card: 0 1px 2px rgba(18,36,31,0.04), 0 8px 24px -12px rgba(18,36,31,0.12);
+    --font-display: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-body: "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0A1512;
+      --surface: #0F1E1A;
+      --surface-2: #132922;
+      --ink: #E9F3EF;
+      --ink-soft: #9FB6AE;
+      --ink-faint: #6C8981;
+      --line: #1E332C;
+      --accent: #3FC2C9;
+      --accent-strong: #63D6DC;
+      --accent-tint: rgba(63,194,201,0.14);
+      --focus-ring: #63D6DC;
+
+      --seg-owner: #3FC2C9;
+      --seg-owner-tint: rgba(63,194,201,0.14);
+      --seg-free: #E3A15C;
+      --seg-free-tint: rgba(227,161,92,0.14);
+      --seg-student: #A3C877;
+      --seg-student-tint: rgba(163,200,119,0.14);
+
+      --shadow-card: 0 1px 2px rgba(0,0,0,0.3), 0 12px 28px -14px rgba(0,0,0,0.55);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0A1512; --surface: #0F1E1A; --surface-2: #132922; --ink: #E9F3EF;
+    --ink-soft: #9FB6AE; --ink-faint: #6C8981; --line: #1E332C;
+    --accent: #3FC2C9; --accent-strong: #63D6DC; --accent-tint: rgba(63,194,201,0.14);
+    --focus-ring: #63D6DC;
+    --seg-owner: #3FC2C9; --seg-owner-tint: rgba(63,194,201,0.14);
+    --seg-free: #E3A15C; --seg-free-tint: rgba(227,161,92,0.14);
+    --seg-student: #A3C877; --seg-student-tint: rgba(163,200,119,0.14);
+    --shadow-card: 0 1px 2px rgba(0,0,0,0.3), 0 12px 28px -14px rgba(0,0,0,0.55);
+  }
+  :root[data-theme="light"] {
+    --bg: #F6F9F8; --surface: #FFFFFF; --surface-2: #EEF3F1; --ink: #12241F;
+    --ink-soft: #55655F; --ink-faint: #86958F; --line: #DEE6E2;
+    --accent: #0E7C86; --accent-strong: #0A5A62; --accent-tint: #E3F3F2;
+    --focus-ring: #0E7C86;
+    --seg-owner: #0E7C86; --seg-owner-tint: #E3F3F2;
+    --seg-free: #A85F1E; --seg-free-tint: #FAEDDE;
+    --seg-student: #5C7A34; --seg-student-tint: #EDF3E1;
+    --shadow-card: 0 1px 2px rgba(18,36,31,0.04), 0 8px 24px -12px rgba(18,36,31,0.12);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+
+  a { color: var(--accent); }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 56px 24px 96px;
+  }
+
+  header.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 48px;
+  }
+  header.brand .mark {
+    width: 30px; height: 30px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--accent), var(--seg-student));
+    flex-shrink: 0;
+  }
+  header.brand .name {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
+  }
+
+  .eyebrow {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 14px;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.9rem, 4.2vw, 2.7rem);
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+    margin: 0 0 16px;
+    text-wrap: balance;
+    color: var(--ink);
+  }
+
+  .sub {
+    font-size: 1.08rem;
+    color: var(--ink-soft);
+    max-width: 56ch;
+    margin: 0 0 8px;
+  }
+
+  .trust-line {
+    position: relative;
+    margin: 20px 0 44px;
+    padding-left: 16px;
+    font-size: 0.88rem;
+    color: var(--ink-faint);
+    max-width: 56ch;
+  }
+  .trust-line::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--ink-faint);
+  }
+
+  form { margin: 0; }
+
+  .step {
+    margin-bottom: 40px;
+  }
+  .step-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--ink);
+    margin-bottom: 18px;
+  }
+  .step-label .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--accent-tint);
+    color: var(--accent-strong);
+    font-size: 0.75rem;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  .segments {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  @media (min-width: 620px) {
+    .segments { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .segment-card {
+    position: relative;
+    display: block;
+    cursor: pointer;
+  }
+  .segment-card input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 1px; height: 1px;
+    pointer-events: none;
+  }
+  .segment-card .card-inner {
+    height: 100%;
+    background: var(--surface);
+    border: 1.5px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 20px 18px;
+    transition: border-color 120ms ease, box-shadow 120ms ease, transform 120ms ease;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .segment-card:hover .card-inner {
+    border-color: var(--seg-color, var(--accent));
+    transform: translateY(-1px);
+  }
+  .segment-card input[type="radio"]:focus-visible ~ .card-inner {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+  .segment-card input[type="radio"]:checked ~ .card-inner {
+    border-color: var(--seg-color, var(--accent));
+    background: var(--seg-tint, var(--accent-tint));
+    box-shadow: var(--shadow-card);
+  }
+  .segment-card .icon {
+    width: 34px; height: 34px;
+    border-radius: 9px;
+    background: var(--seg-tint, var(--accent-tint));
+    color: var(--seg-color, var(--accent));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .segment-card input[type="radio"]:checked ~ .card-inner .icon {
+    background: var(--seg-color, var(--accent));
+    color: var(--surface);
+  }
+  .segment-card .icon svg { width: 18px; height: 18px; }
+  .segment-card .card-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.98rem;
+    color: var(--ink);
+    line-height: 1.25;
+  }
+  .segment-card .card-desc {
+    font-size: 0.87rem;
+    color: var(--ink-soft);
+    line-height: 1.45;
+  }
+  .segment-card .check {
+    position: absolute;
+    top: 16px; right: 16px;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    border: 1.5px solid var(--line);
+    background: var(--surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 120ms ease, background 120ms ease;
+  }
+  .segment-card input[type="radio"]:checked ~ .card-inner .check {
+    border-color: var(--seg-color, var(--accent));
+    background: var(--seg-color, var(--accent));
+  }
+  .segment-card .check svg {
+    width: 10px; height: 10px;
+    opacity: 0;
+    transition: opacity 120ms ease;
+  }
+  .segment-card input[type="radio"]:checked ~ .card-inner .check svg { opacity: 1; }
+
+  .contact-step {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 260ms ease, opacity 200ms ease;
+  }
+  .contact-step.is-open {
+    max-height: 600px;
+    opacity: 1;
+  }
+
+  .fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 6px;
+  }
+  @media (max-width: 480px) {
+    .fields { grid-template-columns: 1fr; }
+  }
+  .field label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+  .field input {
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    padding: 12px 14px;
+    border-radius: var(--radius-md);
+    border: 1.5px solid var(--line);
+    background: var(--surface);
+    color: var(--ink);
+    transition: border-color 120ms ease, box-shadow 120ms ease;
+  }
+  .field input::placeholder { color: var(--ink-faint); }
+  .field input:focus-visible {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-tint);
+  }
+  .field .err {
+    display: none;
+    font-size: 0.78rem;
+    color: #C24444;
+    margin-top: 6px;
+  }
+  .field.has-error input { border-color: #C24444; }
+  .field.has-error .err { display: block; }
+
+  /* honeypot */
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  .submit-row {
+    margin-top: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  button.cta {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--surface);
+    background: var(--ink-faint);
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 15px 22px;
+    cursor: not-allowed;
+    transition: background 140ms ease, transform 100ms ease;
+    width: 100%;
+  }
+  button.cta.is-ready {
+    background: var(--accent-strong);
+    cursor: pointer;
+  }
+  button.cta.is-ready:hover { background: var(--accent); }
+  button.cta.is-ready:active { transform: translateY(1px); }
+  button.cta:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+  button.cta:disabled { opacity: 0.85; }
+
+  .privacy-note {
+    font-size: 0.8rem;
+    color: var(--ink-faint);
+    text-align: center;
+  }
+
+  .status {
+    margin-top: 14px;
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    text-align: center;
+    display: none;
+  }
+  .status.is-visible { display: block; }
+
+  footer {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 0.8rem;
+    color: var(--ink-faint);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="brand">
+    <div class="mark" aria-hidden="true"></div>
+    <div class="name">[Your Community Name]</div>
+  </header>
+
+  <p class="eyebrow">Before we begin</p>
+  <h1>Which stage of the journey are you on?</h1>
+  <p class="sub">Answer two quick questions and we'll route you straight to the roadmap, pricing, and case studies built for exactly where you are right now.</p>
+
+  <p class="trust-line">For business owners, freelancers, and career-changers building real marketing skills — not generic advice.</p>
+
+  <form id="segForm" novalidate>
+
+    <div class="step">
+      <p class="step-label"><span class="num">1</span> Choose your path</p>
+
+      <div class="segments" role="radiogroup" aria-label="Choose your path">
+
+        <label class="segment-card" style="--seg-color: var(--seg-owner); --seg-tint: var(--seg-owner-tint);">
+          <input type="radio" name="segment" value="business_owner" required />
+          <span class="card-inner">
+            <span class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 12h18"/></svg>
+            </span>
+            <span class="card-title">Grow my business</span>
+            <span class="card-desc">You're juggling every role already and want marketing that pays for itself — not another agency invoice with no ROI.</span>
+            <span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          </span>
+        </label>
+
+        <label class="segment-card" style="--seg-color: var(--seg-free); --seg-tint: var(--seg-free-tint);">
+          <input type="radio" name="segment" value="freelancer" required />
+          <span class="card-inner">
+            <span class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M2 9h20"/><path d="M8 14h.01M12 14h4"/></svg>
+            </span>
+            <span class="card-title">Land better clients</span>
+            <span class="card-desc">Stuck picking a niche or breaking the portfolio catch-22? Get the positioning and pricing that win higher-paying work.</span>
+            <span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          </span>
+        </label>
+
+        <label class="segment-card" style="--seg-color: var(--seg-student); --seg-tint: var(--seg-student-tint);">
+          <input type="radio" name="segment" value="student" required />
+          <span class="card-inner">
+            <span class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></svg>
+            </span>
+            <span class="card-title">Launch my career</span>
+            <span class="card-desc">Buried in free tutorials with nothing to show for it? Get a real, step-by-step roadmap from theory to your first paid role.</span>
+            <span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          </span>
+        </label>
+
+      </div>
+    </div>
+
+    <div class="step contact-step" id="contactStep">
+      <p class="step-label"><span class="num">2</span> Where should we send it?</p>
+
+      <div class="fields">
+        <div class="field" id="nameField">
+          <label for="fullName">Full name</label>
+          <input type="text" id="fullName" name="fullName" placeholder="Jane Ndlovu" autocomplete="name" />
+          <p class="err">Enter your name.</p>
+        </div>
+        <div class="field" id="emailField">
+          <label for="email">Email address</label>
+          <input type="email" id="email" name="email" placeholder="jane@email.com" autocomplete="email" />
+          <p class="err">Enter a valid email address.</p>
+        </div>
+      </div>
+
+      <!-- Honeypot spam trap: real users never see or fill this -->
+      <div class="hp" aria-hidden="true">
+        <label for="companyWebsite">Website</label>
+        <input type="text" id="companyWebsite" name="companyWebsite" tabindex="-1" autocomplete="off" />
+      </div>
+    </div>
+
+    <div class="submit-row">
+      <button type="submit" class="cta" id="ctaButton" disabled>Select a path to continue</button>
+      <p class="privacy-note">We'll only use this to route you to the right plan and follow up if you don't finish. No spam, unsubscribe anytime.</p>
+      <p class="status" id="statusMsg" role="status" aria-live="polite"></p>
+    </div>
+
+  </form>
+
+  <footer>
+    <span>&copy; <span id="year"></span> [Your Community Name]. All rights reserved.</span>
+    <span><a href="#">Privacy Policy</a></span>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* =====================================================================
+     CONFIG — edit these before going live
+  ===================================================================== */
+  var CONFIG = {
+    // Google Apps Script (or Zapier/Make catch hook) Web App URL that
+    // appends each submission to your Google Sheets Leads Database
+    // (see Stage 1 of the Business System Development Plan).
+    SHEETS_WEBHOOK_URL: "https://script.google.com/macros/s/REPLACE_WITH_YOUR_DEPLOYMENT_ID/exec",
+
+    // Where each segment gets routed after submitting (Stage 2 landing
+    // pages). Query params carry the lead's name/email/segment so the
+    // landing page and payment gateway can prefill/personalize.
+    LANDING_PAGES: {
+      business_owner: "https://your-domain.com/business-owners",
+      freelancer:      "https://your-domain.com/freelancers",
+      student:         "https://your-domain.com/get-started"
+    }
+  };
+
+  var CTA_LABELS = {
+    business_owner: "Get My Business Roadmap →",
+    freelancer:      "Get My Freelance Roadmap →",
+    student:         "Get My Career Roadmap →"
+  };
+
+  var form = document.getElementById("segForm");
+  var contactStep = document.getElementById("contactStep");
+  var ctaButton = document.getElementById("ctaButton");
+  var statusMsg = document.getElementById("statusMsg");
+  var radios = form.querySelectorAll('input[name="segment"]');
+  var nameInput = document.getElementById("fullName");
+  var emailInput = document.getElementById("email");
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  var selectedSegment = null;
+
+  radios.forEach(function (radio) {
+    radio.addEventListener("change", function () {
+      selectedSegment = radio.value;
+      contactStep.classList.add("is-open");
+      refreshButtonState();
+      // Give the newly revealed name field focus for a fast flow.
+      window.setTimeout(function () { nameInput.focus(); }, 260);
+    });
+  });
+
+  function isValidEmail(value) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  }
+
+  function refreshButtonState() {
+    var ready = !!selectedSegment &&
+      nameInput.value.trim().length > 1 &&
+      isValidEmail(emailInput.value.trim());
+
+    ctaButton.disabled = !ready;
+    ctaButton.classList.toggle("is-ready", ready);
+
+    if (!selectedSegment) {
+      ctaButton.textContent = "Select a path to continue";
+    } else if (!ready) {
+      ctaButton.textContent = "Enter your details to continue";
+    } else {
+      ctaButton.textContent = CTA_LABELS[selectedSegment];
+    }
+  }
+
+  [nameInput, emailInput].forEach(function (input) {
+    input.addEventListener("input", refreshButtonState);
+  });
+
+  function setFieldError(fieldId, hasError) {
+    document.getElementById(fieldId).classList.toggle("has-error", hasError);
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    var name = nameInput.value.trim();
+    var email = emailInput.value.trim();
+    var honeypot = document.getElementById("companyWebsite").value;
+
+    setFieldError("nameField", name.length < 2);
+    setFieldError("emailField", !isValidEmail(email));
+
+    if (!selectedSegment || name.length < 2 || !isValidEmail(email)) {
+      return;
+    }
+
+    // Bot submitted the hidden honeypot field — silently drop.
+    if (honeypot) { return; }
+
+    ctaButton.disabled = true;
+    ctaButton.textContent = "Sending…";
+    statusMsg.textContent = "One moment, routing you to your plan…";
+    statusMsg.classList.add("is-visible");
+
+    /* ---- GA4 event -------------------------------------------------- */
+    if (typeof gtag === "function") {
+      gtag("event", "generate_lead", {
+        segment: selectedSegment,
+        form_name: "segmentation_form"
+      });
+    }
+
+    /* ---- Meta Pixel event -------------------------------------------- */
+    if (typeof fbq === "function") {
+      fbq("track", "Lead", {
+        content_name: "segmentation_form",
+        content_category: selectedSegment
+      });
+    }
+
+    /* ---- Push the lead to the Google Sheets webhook ------------------
+       Sent with mode:"no-cors" (fire-and-forget) so the redirect below
+       is never blocked by network latency, CORS, or endpoint downtime —
+       the follow-up automation for drop-offs handles anyone this call
+       fails to reach. */
+    var payload = {
+      fullName: name,
+      email: email,
+      segment: selectedSegment,
+      source: document.referrer || "direct",
+      submittedAt: new Date().toISOString()
+    };
+
+    try {
+      fetch(CONFIG.SHEETS_WEBHOOK_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      }).catch(function () { /* handled by follow-up automation */ });
+    } catch (err) { /* fetch not available / blocked — ignore */ }
+
+    /* ---- Route to the segment's landing page -------------------------
+       fires after a brief delay so the GA4/Pixel/webhook calls above
+       have a chance to leave the page before navigation. */
+    var destination = CONFIG.LANDING_PAGES[selectedSegment];
+    var params = new URLSearchParams({ name: name, email: email, segment: selectedSegment });
+
+    window.setTimeout(function () {
+      window.location.href = destination + (destination.indexOf("?") > -1 ? "&" : "?") + params.toString();
+    }, 350);
+  });
+})();
+</script>
+</body>
+</html>
