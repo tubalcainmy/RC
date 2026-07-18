@@ -557,9 +557,9 @@
     // pages). Query params carry the lead's name/email/segment so the
     // landing page and payment gateway can prefill/personalize.
     LANDING_PAGES: {
-      business_owner: "https://your-domain.com/business-owners",
-      freelancer:      "https://your-domain.com/freelancers",
-      student:         "https://your-domain.com/get-started"
+      business_owner: "https://tubalcainmy.github.io/RC/business-owners",
+      freelancer:      "https://tubalcainmy.github.io/RC/freelancers",
+      student:         "https://tubalcainmy.github.io/RC/get-started"
     }
   };
 
